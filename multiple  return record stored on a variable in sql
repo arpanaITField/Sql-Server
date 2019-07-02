@@ -1,0 +1,33 @@
+--SELECT dbo.ufnMultiplePoInvoices()  
+create Function [dbo].[ufnMultipleCustomerInvoices](  
+@InvoiceID as int  
+)  
+returns varchAR(250) as  
+Begin  
+  
+  
+declare @tmp varchar(250)  
+SET @tmp = ''  
+--select @tmp = @tmp + username + ', ' from #user  
+   
+select @tmp = @tmp + P.CustomerPONbr + ', '  from tblInvoicePurchaseOrder I inner join tblPurchaseOrders P
+  on i.PurchaseOrderID=p.PurchaseOrderID WHERE	I.InvoiceID=@InvoiceID  
+  
+RETURN SUBSTRING(@tmp, 0, LEN(@tmp))  
+  
+     --declare @BookCount as int;  
+     --Select @BookCount = Count(Title_id)  
+     --from Titles;  
+     --return @BookCount;  
+  
+end;
+
+
+
+
+ 
+
+
+
+
+
